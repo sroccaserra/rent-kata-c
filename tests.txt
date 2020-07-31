@@ -1,5 +1,5 @@
 ## Test suite for rent
-< 2
+< 3
 ## one order only
 < 1
 < 0 5 100
@@ -9,3 +9,8 @@
 < 0 5 200
 < 5 9 50
 > 250
+## two incompatible orders
+< 2
+< 0 5 400
+< 3 10 900
+> 900
