@@ -3,6 +3,14 @@
 
 #define MAX_ORDERS 10000
 
+struct order {
+    int start_time;
+    int duration;
+    int price;
+};
+
+static struct order Orders[MAX_ORDERS];
+
 void process_cases(int nb_cases);
 void compute_value(int nb_orders);
 void scan_orders(int nb_orders);
@@ -22,12 +30,6 @@ void process_cases(int nb_cases) {
         compute_value(nb_orders);
     }
 }
-
-static struct {
-    int start_time;
-    int duration;
-    int price;
-} Orders[MAX_ORDERS];
 
 void compute_value(int nb_orders) {
     scan_orders(nb_orders);
