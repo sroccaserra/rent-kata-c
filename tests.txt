@@ -1,16 +1,24 @@
 ## Test suite for rent
+
+# Number of test cases
 < 3
+
 ## one order only
 < 1
 < 0 5 100
+
 > 100
+
 ## two compatible orders
 < 2
 < 0 5 200
 < 5 9 50
+
 > 250
+
 ## two incompatible orders
 < 2
 < 0 5 400
 < 3 10 900
+
 > 900
