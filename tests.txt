@@ -22,3 +22,12 @@
 < 3 10 900
 
 > 900
+
+## four compatible and incompatible orders
+# < 4
+# < 0 5 10
+# < 3 7 14
+# < 5 9 7
+# < 6 9 8
+#
+# > 18

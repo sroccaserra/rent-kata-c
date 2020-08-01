@@ -12,6 +12,7 @@ struct order {
 void process_cases(int nb_cases);
 void compute_value(int nb_orders, struct order orders[]);
 void scan_orders(int nb_orders, struct order orders[]);
+struct order next_compatible_order(int position, struct order current);
 
 int main() {
     int nb_cases;
@@ -23,7 +24,7 @@ int main() {
 }
 
 void process_cases(int nb_cases) {
-    struct order orders[MAX_ORDERS];
+    struct order orders[MAX_ORDERS+1];
 
     for (int test_case = 0; test_case < nb_cases; ++test_case) {
         int nb_orders;
@@ -33,8 +34,18 @@ void process_cases(int nb_cases) {
 }
 
 void compute_value(int nb_orders, struct order orders[]) {
-
     scan_orders(nb_orders, orders);
+
+    for(int i = nb_orders -1 ; i >= 0; --i) {
+        struct order current = orders[i];
+        struct order next = orders[i+1];
+        struct order next_compatible = next_compatible_order(i+1, current);
+
+        int xxx = current.price + next_compatible.price;
+        current.price = (xxx > next.price)
+            ? xxx
+            : next.price;
+    }
 
     int value = 0;
     if (nb_orders == 1) {
@@ -61,4 +72,12 @@ void scan_orders(int nb_orders, struct order orders[]) {
                 &orders[i].duration,
                 &orders[i].price);
     }
+
+    orders[nb_orders].start_time = 2000000;
+    orders[nb_orders].duration = 0;
+    orders[nb_orders].price = 0;
+}
+
+struct order next_compatible_order(int position, struct order current) {
+    return current;
 }
