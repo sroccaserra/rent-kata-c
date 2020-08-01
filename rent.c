@@ -9,6 +9,10 @@ struct order {
     int price;
 };
 
+static inline int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
 void process_cases(int nb_cases);
 void compute_value(int nb_orders, struct order orders[]);
 void scan_orders(int nb_orders, struct order orders[]);
@@ -41,10 +45,7 @@ void compute_value(int nb_orders, struct order orders[]) {
         struct order next = orders[i+1];
         struct order next_compatible = next_compatible_order(i+1, current);
 
-        int xxx = current.price + next_compatible.price;
-        current.price = (xxx > next.price)
-            ? xxx
-            : next.price;
+        current.price = max(current.price + next_compatible.price, next.price);
     }
 
     int value = 0;
