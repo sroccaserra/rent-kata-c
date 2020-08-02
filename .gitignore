@@ -1,3 +1,5 @@
 *.o
 *.dat
 rent
+gdb.xml
+rent.dSYM

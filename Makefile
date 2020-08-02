@@ -1,3 +1,5 @@
+CFLAGS = -Wall -Wextra -Wpedantic
+
 default: test
 
 test.dat: tests.txt
@@ -9,7 +11,11 @@ expected.dat: tests.txt
 .PHONY: test
 test: rent test.dat expected.dat
 	./rent <test.dat >result.dat
-	diff expected.dat result.dat
+	git diff --no-index expected.dat result.dat
+
+debug: CFLAGS += -DDEBUG -g
+debug: rent test.dat expected.dat
+	gdb -ex 'b main' -ex 'set args < test.dat' rent
 
 .PHONY: clean
 clean:
