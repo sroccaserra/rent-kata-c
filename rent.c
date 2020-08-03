@@ -15,7 +15,7 @@ static inline int max(int a, int b) {
 }
 
 void process_cases(int nb_cases);
-void compute_value(int nb_orders, struct order orders[]);
+int compute_value(int nb_orders, struct order orders[]);
 void scan_orders(int nb_orders, struct order orders[]);
 struct order *next_compatible_order(int position, struct order *current, struct order orders[]);
 
@@ -34,13 +34,15 @@ void process_cases(int nb_cases) {
     for (int test_case = 0; test_case < nb_cases; ++test_case) {
         int nb_orders;
         scanf("%d", &nb_orders);
-        compute_value(nb_orders, orders);
+        scan_orders(nb_orders, orders);
+
+        int value = compute_value(nb_orders, orders);
+
+        printf("%d\n", value);
     }
 }
 
-void compute_value(int nb_orders, struct order orders[]) {
-    scan_orders(nb_orders, orders);
-
+int compute_value(int nb_orders, struct order orders[]) {
     for(int i = nb_orders -1 ; i >= 0; --i) {
         struct order *current = &orders[i];
         struct order *next = &orders[i+1];
@@ -49,7 +51,7 @@ void compute_value(int nb_orders, struct order orders[]) {
         current->price = max(current->price + next_compatible->price, next->price);
     }
 
-    printf("%d\n", orders[0].price);
+    return orders[0].price;
 }
 
 void scan_orders(int nb_orders, struct order orders[]) {
