@@ -15,7 +15,11 @@ test: rent test.dat expected.dat
 
 debug: CFLAGS += -DDEBUG -g
 debug: rent test.dat expected.dat
-	gdb -ex 'b main' -ex 'set args < test.dat' rent
+	@echo "To debug on macOs, use:"
+	@echo "$$ lldb rent"
+	@echo "(lldb) b main"
+	@echo "(lldb) process launch -i test.dat"
+	@echo "(lldb) run"
 
 .PHONY: clean
 clean:
